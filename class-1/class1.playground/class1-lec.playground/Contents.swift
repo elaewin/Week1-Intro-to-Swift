@@ -87,12 +87,51 @@ repeat {
 
 //functions
 
-func square(number: Int) {
-    print(number * number)
+func square(number: Int) -> Int {
+    return number * number
 }
 
 square(number: 100)
 
+let mySquareFunc = square(number: 10)
 
+let addTwoNumber: (Int, Int) -> () = {(numberOne, numberTwo) in
+    print("\(numberOne + numberTwo)")
+}
 
+addTwoNumber(10, 20)
 
+//optionals
+var optionalString : String?
+
+let counter = 1000
+
+if counter < 100 {
+    optionalString = "Under 100"
+}
+
+print(optionalString)
+
+//unwrapping:
+
+if let optionalString = optionalString {
+    //do some stuff with optionalString if it has a value, because it's now unwrapped (and it's a constant now)
+    print(optionalString)
+}
+
+for num in 1...100 {
+    guard let optionalString = optionalString else { break }
+    print(num)
+}
+
+//functions with optionals
+
+func number(myString: String = "0") -> Int? {
+    return Int(myString)
+}
+
+number(myString: "Erica")
+
+number(myString: "12")
+
+number()
