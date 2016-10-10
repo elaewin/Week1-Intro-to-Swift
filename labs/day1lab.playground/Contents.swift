@@ -37,7 +37,13 @@ lengthOfString(stringToCount: "This is another string. Yay.")
 
 //Write a function that takes in a string and reverses it. Use a simple for loop
 
-func reverseString(stringToReverse: String) {
-
+func reverseString(stringToReverse: String) -> String {
+    var result = ""
+    for index in stringToReverse.characters.indices.reversed() {
+        result.append(stringToReverse[index])
+    }
+    return result
 }
+
+reverseString(stringToReverse: "Reverse me!")
 
