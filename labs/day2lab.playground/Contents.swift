@@ -2,29 +2,32 @@
 
 import UIKit
 
-var str = "Hello, playground"
-
 // Write a function that takes in an array of planet names as strings, checks if array contains “Earth”. If it does not, add it. Otherwise, do nothing.
 
-var planetArray = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+var planetArray = ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
 
-func findEarth(arrayOfPlanets: [String]) {
+func checkForEarth(arrayOfPlanets: [String]) {
     
     if !arrayOfPlanets.contains(where: {$0 == "Earth"}) {
-//        arrayOfPlanets += "Earth"
+        arrayOfPlanets.append("Earth")
     }
 }
+
+checkForEarth(arrayOfPlanets: planetArray)
+
+
 
 //Using sort and reduce, create string from the above array sorted alphabetically. Example Output: [“Venus”, “Earth”] would produce “Earth Venus”
 
 func sortAndReduce(array: [String]) -> String {
     
-    var sortedArray = array.sorted()
+    let result = array.sorted().reduce("", {$0 + " " + $1})
     
-    
-    
-    return ""
+    return result
 }
+
+sortAndReduce(array: planetArray)
+
 
 
 //Declare a dictionary of string keys and values. Declare a function that takes in a string and searches dictionary for it as a value.
@@ -36,7 +39,7 @@ func whichGod(name: String) -> String {
     let name = name.capitalized
     var result = ""
     
-    if (dictionaryOfPlanetGods[name] != nil) {
+    if dictionaryOfPlanetGods[name] != nil {
         result = dictionaryOfPlanetGods[name]!
     } else {
         result = "Not found."
