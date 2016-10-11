@@ -10,7 +10,7 @@ var planetArray = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Ur
 
 func findEarth(arrayOfPlanets: [String]) {
     
-    if !arrayOfPlanets.contains($0 == "Earth") {
+    if !arrayOfPlanets.contains(where: {$0 == "Earth"}) {
 //        arrayOfPlanets += "Earth"
     }
 }
