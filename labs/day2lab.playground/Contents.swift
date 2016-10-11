@@ -65,8 +65,25 @@ whichGod(name: "Bill")
 
 //Write a function that counts repeating words in an array of strings, and prints out the count of each
 
-let arrayOfStrings = ["Climb a tree, wait for a fireman jump to fireman then scratch his face.", "Sleep on keyboard stand in front of the computer screen, but leave fur on owners clothes stand in front of the computer screen, yet instantly break out into full speed gallop across the house for no reason behind the couch.", "All of a sudden cat goes crazy ears back wide eyed.", "Fall over dead not really but gets sympathy find empty spot in cupboard and sleep all day."]
+let arrayOfStrings = ["Chase", "chase", "mice", "run", "in", "circles", "yet", "mark", "territory", "sleep", "on", "keyboard", "claw", "drapes", "intently", "sniff", "hand", "burrow", "under", "covers", "for", "behind", "the", "couch", "but", "inspect", "anything", "brought", "into", "the", "house", "intently", "stare", "at", "the", "same", "spot", "flop", "over", "or", "give", "attitude", "or", "hide", "when", "guests", "come", "over", "yet", "hide", "when", "guests", "come", "over", "mark", "territory"]
 
 
+func countWords(arrayOfWords: [String]) {
+    
+    var comparisonSet: Set<String> = []
+    var filtered = [String]()
+    
+    for word in arrayOfWords {
+        
+        if !comparisonSet.contains(word.lowercased()) {
+            comparisonSet.insert(word.lowercased())
+            
+            filtered = arrayOfWords.filter({$0 == word || $0 == word.lowercased()})
+            
+            print(word.lowercased(), " - ", filtered.count, "time(s)")
+            
+        }
+    }
+}
 
-
+countWords(arrayOfWords: arrayOfStrings)
