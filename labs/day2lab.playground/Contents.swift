@@ -6,14 +6,21 @@ import UIKit
 
 var planetArray = ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
 
-func checkForEarth(arrayOfPlanets: [String]) {
+func checkForEarth(arrayOfPlanets: [String]) -> [String] {
+    
+    var usableArray = arrayOfPlanets
     
     if !arrayOfPlanets.contains(where: {$0 == "Earth"}) {
-        arrayOfPlanets.append("Earth")
+        usableArray.append("Earth")
     }
+    
+    return usableArray
+
 }
 
 checkForEarth(arrayOfPlanets: planetArray)
+
+checkForEarth(arrayOfPlanets: ["Alpha-Centauri", "Betelgeuse"])
 
 
 
@@ -27,6 +34,8 @@ func sortAndReduce(array: [String]) -> String {
 }
 
 sortAndReduce(array: planetArray)
+
+sortAndReduce(array: ["Minbar", "Alpha-Centauri", "Betelgeuse"])
 
 
 
@@ -51,6 +60,7 @@ func whichGod(name: String) -> String {
 whichGod(name: "Jupiter")
 whichGod(name: "mercury")
 whichGod(name: "Bill")
+
 
 
 //Write a function that counts repeating words in an array of strings, and prints out the count of each
