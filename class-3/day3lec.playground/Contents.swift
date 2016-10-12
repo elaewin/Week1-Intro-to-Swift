@@ -42,20 +42,20 @@ var str = "Hello, playground"
 //}
 
 
+//
+//let myPerson = Person(name: "Erica", age: 40)
+//
+//let name = myPerson.name
+//
+//var otherPerson = myPerson
+//
+//otherPerson.age
+//otherPerson.age = 10
+//
+//myPerson.age
+//otherPerson.age
 
-let myPerson = Person(name: "Erica", age: 40)
-
-let name = myPerson.name
-
-var otherPerson = myPerson
-
-otherPerson.age
-otherPerson.age = 10
-
-myPerson.age
-otherPerson.age
-
-let personAgeInDogYears = myPerson.ageInDogYears()
+//let personAgeInDogYears = myPerson.ageInDogYears()
 
 
 // struct with optional initializer
@@ -120,13 +120,42 @@ let test = "A string of randomness just for a test"
 let count = test.length()
 
 
+// EQUALITY VS. IDENTITY
+
+let john = Person(name: "John")
+let john2 = Person(name: "John")
+
+if john === john2 {
+    print("These objects are identical")
+}
+
+let john3 = john
+
+if john === john3 {
+    print("These objects are identical")
+}
 
 
+// INHERITANCE
 
+class Student: Person {
+    
+    var studentID: String
+    
+    init(name: String, age: Int? = nil, id: String) {
+        
+        self.studentID = id
+        
+        super.init(name: name, age: 21)
+        
+    }
+}
 
+let student = Student(name: "Bill", id: "aklsurt984y")
 
+student.age
 
-
+student.ageInDogYears()
 
 
 
