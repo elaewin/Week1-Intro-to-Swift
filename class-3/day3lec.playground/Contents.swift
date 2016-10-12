@@ -158,8 +158,79 @@ student.age
 student.ageInDogYears()
 
 
+// PROTOCOLS
+
+protocol WeightCalculatable
+{
+    associatedtype WeightType
+    func calculateWeight() -> WeightType
+}
 
 
+class HeavyThing: WeightCalculatable {
+
+    typealias WeightType = Int
+    
+    func calculateWeight() -> Int {
+        return 100
+    }
+
+}
+
+
+protocol Identity {
+    
+    var id: String { get set }
+    
+    associatedtype Description
+    
+    func description() -> Description
+    
+    func optionalMethod()
+    
+    func requiredMethod()
+    
+}
+
+extension Identity {
+    
+    func description() -> String {
+        return String(describing: self)
+    }
+    
+    func optionalMethod() {
+        print("Optional method!")
+    }
+    
+}
+
+class View : Identity {
+    
+    var id: String
+    
+    var backgroundColor = UIColor.blue
+    
+    init(id: String) {
+        self.id = id
+    }
+    
+    typealias Description = String
+    
+    internal func requiredMethod() {
+        
+    }
+    
+    func description() -> String {
+        return "\(id), BGColor: \(backgroundColor)"
+    }
+
+}
+
+let view = View(id: "dfasdnakjsd")
+
+view.description()
+
+view.optionalMethod()
 
 
 
