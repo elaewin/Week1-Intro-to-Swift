@@ -41,8 +41,15 @@ case .alienInvasion(let ridiculousAssertion):
 
 class Person {
     
+    static var couldLiveOnAnotherPlanet: Bool = false
+    static var humanPlanets: [String] = ["Earth"]
+    
     let firstName: String
-    let lastName: String
+    var lastName: String {
+        didSet {
+            print("Last name successfully changed to \(lastName).")
+        }
+    }
     var age: Int
     
     init(firstName: String, lastName: String, age: Int) {
@@ -55,14 +62,22 @@ class Person {
         self.age += 1
     }
     
+    func changeLastName(newLastName: String) {
+        lastName = newLastName
+    }
+    
+    class func colonized(planet: String) {
+        humanPlanets.append(planet)
+        if humanPlanets.count > 1 {
+            couldLiveOnAnotherPlanet = true
+        }
+    }
 }
-
-var Me = Person(firstName: "Erica", lastName: "Winberry", age: 40)
-
 
 class Student : Person {
     
     var currentClass: String
+    var studentID: String
     
     var assignmentGrades: [Double] {
         didSet {
@@ -74,6 +89,7 @@ class Student : Person {
     var currentGradePercent: Double
     
     init(currentClass: String,
+         studentID: String,
          assignmentGrades: [Double],
          currentGradePercent: Double = 100.00,
          firstName: String,
@@ -81,6 +97,7 @@ class Student : Person {
          age: Int) {
         
         self.currentClass = currentClass
+        self.studentID = studentID
         self.assignmentGrades = assignmentGrades
         self.currentGradePercent = currentGradePercent
         
@@ -110,8 +127,9 @@ class Student : Person {
     
 }
 
+var me = Person(firstName: "Erica", lastName: "Winberry", age: 40)
 
-var alsoMe = Student(currentClass: "iOS 401", assignmentGrades: [90.0, 89.0, 50.0], firstName: "Erica", lastName: "Winberry", age: 40)
+var alsoMe = Student(currentClass: "iOS 401", studentID: "feh", assignmentGrades: [90.0, 89.0, 50.0], firstName: "Erica", lastName: "Winberry", age: 40)
 
 alsoMe.addAssignmentGrade(newGrade: 89.0)
 alsoMe.updateClassGrades()
@@ -125,18 +143,23 @@ alsoMe.currentGradePercent
 
 class Classroom {
     
-    var studentList = [Student]()
+    private var studentList = [Student]()
     
     static let shared = Classroom()
     
     private init() {}
     
-    func add(newStudent: Student) {
+    func addStudent(newStudent: Student) {
         studentList.append(newStudent)
     }
     
-    
-
+    func removeStudent(studentID: String) {
+        for (index, student) in studentList.enumerated() {
+            if studentID == student.studentID {
+                studentList.remove(at: index)
+            }
+        }
+    }
 }
 
 
