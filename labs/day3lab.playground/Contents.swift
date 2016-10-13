@@ -30,11 +30,11 @@ class ToDo : Identity {
 
 protocol ObjectStore
 {
-    func add(itemToAdd: String) -> [String]
+    func add(itemToAdd: ToDo) -> [ToDo]
     
-    func remove(itemToRemove: String) -> [String]
+    func remove(itemToRemove: String) -> [ToDo]
     
-    func objectAtIndex(index: Int) -> String
+    func objectAtIndex(index: Int) -> ToDo
     
     func count() -> Int
     
@@ -46,40 +46,38 @@ protocol ObjectStore
 
 class Store : ObjectStore {
     
-    var listOfItems: [String]
+    var listOfItems: [ToDo]
     
-    init(listOfItems: [String]) {
+    init(listOfItems: [ToDo]) {
         self.listOfItems = listOfItems
     }
     
-    func add(itemToAdd: String) -> [String] {
+    func add(itemToAdd: ToDo) -> [ToDo] {
         listOfItems.append(itemToAdd)
         return listOfItems
     }
     
-    func remove(itemToRemove: String) -> [String] {
+    func remove(itemToRemove: String) -> [ToDo] {
         
         for (index, item) in listOfItems.enumerated() {
-            if item.lowercased() == itemToRemove.lowercased() {
+            if item.id.lowercased() == itemToRemove.lowercased() {
                 listOfItems.remove(at: index)
             }
         }
         return listOfItems
     }
     
-    func objectAtIndex(index: Int) -> String {
+    func objectAtIndex(index: Int) -> ToDo {
         return listOfItems[index]
     }
-    
     
     func count() -> Int {
         let result = listOfItems.count
         return result
     }
     
-    
     func allObjects() -> String {
-        let result = listOfItems.reduce("Grocery List: ", {$0 + $1 + ", "} )
+        let result = listOfItems.reduce("Grocery List: ", {$0 + $1.id + ", "} )
         return result
     }
     
@@ -88,14 +86,16 @@ class Store : ObjectStore {
 
 // Demonstrate adding / removing of ToDo items.
 
-var groceryList = Store(listOfItems: ["milk"])
+let milk = ToDo(id: "milk")
+
+var groceryList = Store(listOfItems: [milk])
 
 groceryList.listOfItems
 
-groceryList.add(itemToAdd: "cheese")
-groceryList.add(itemToAdd: "pickles")
-groceryList.add(itemToAdd: "kibble")
-groceryList.add(itemToAdd: "peaches")
+groceryList.add(itemToAdd: ToDo(id: "cheese"))
+groceryList.add(itemToAdd: ToDo(id: "pickles"))
+groceryList.add(itemToAdd: ToDo(id: "kibble"))
+groceryList.add(itemToAdd: ToDo(id: "peaches"))
 
 groceryList.remove(itemToRemove: "pickles")
 groceryList.remove(itemToRemove: "Milk")
