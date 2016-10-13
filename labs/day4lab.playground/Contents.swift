@@ -4,8 +4,19 @@ import UIKit
 
 // Declare Enum that conforms to Error. Your enum should have at least 5 cases and should use Associated Values.
 
+enum LateForClass: Error {
 
-
+    case overslept(Int)
+    
+    case windstorm(String)
+    
+    case carTrouble(String)
+    
+    case busTrouble(Int)
+    
+    case alienInvasion(String)
+    
+}
 
 
 
