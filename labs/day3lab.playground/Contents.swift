@@ -38,7 +38,7 @@ protocol ObjectStore
     
     func count() -> Int
     
-    func allObjects()
+    func allObjects() -> String
 }
 
 
@@ -78,11 +78,9 @@ class Store : ObjectStore {
     }
     
     
-    func allObjects() {
-        for item in listOfItems {
-            print(item)
-        }
-        
+    func allObjects() -> String {
+        let result = listOfItems.reduce("Grocery List: ", {$0 + $1 + ", "} )
+        return result
     }
     
 }
