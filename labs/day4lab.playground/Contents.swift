@@ -131,6 +131,8 @@ var me = Person(firstName: "Erica", lastName: "Winberry", age: 40)
 
 var alsoMe = Student(currentClass: "iOS 401", studentID: "feh", assignmentGrades: [90.0, 89.0, 50.0], firstName: "Erica", lastName: "Winberry", age: 40)
 
+var randomStudent = Student(currentClass: "none", studentID: "rando", assignmentGrades: [90.0, 45.0], firstName: "Rando", lastName: "McRandom", age: 34)
+
 alsoMe.addAssignmentGrade(newGrade: 89.0)
 alsoMe.updateClassGrades()
 alsoMe.currentGradePercent
@@ -156,11 +158,27 @@ class Classroom {
     func removeStudent(studentID: String) {
         for (index, student) in studentList.enumerated() {
             if studentID == student.studentID {
+                print("Removing \(student.firstName) at index \(index)")
                 studentList.remove(at: index)
             }
         }
     }
+    
+    func listStudents() {
+        for student in studentList {
+            print(student.firstName, student.lastName)
+        }
+    }
 }
+
+Classroom.shared.addStudent(newStudent: alsoMe)
+Classroom.shared.addStudent(newStudent: randomStudent)
+
+Classroom.shared.listStudents()
+
+Classroom.shared.removeStudent(studentID: "feh")
+
+Classroom.shared.listStudents()
 
 
 
