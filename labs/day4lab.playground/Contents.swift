@@ -131,7 +131,12 @@ class Classroom {
     
     private init() {}
     
+    func add(newStudent: Student) {
+        studentList.append(newStudent)
+    }
     
+    
+
 }
 
 
