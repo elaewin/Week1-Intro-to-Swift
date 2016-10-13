@@ -67,16 +67,15 @@ class Student : Person {
     var assignmentGrades: [Double] {
         didSet {
             updateClassGrades()
+            print("Updating class grade to include newest grade.")
         }
     }
     
     var currentGradePercent: Double
-    var letterGrade: Character
     
     init(currentClass: String,
          assignmentGrades: [Double],
          currentGradePercent: Double = 100.00,
-         letterGrade: Character = "A",
          firstName: String,
          lastName: String,
          age: Int) {
@@ -84,7 +83,6 @@ class Student : Person {
         self.currentClass = currentClass
         self.assignmentGrades = assignmentGrades
         self.currentGradePercent = currentGradePercent
-        self.letterGrade = letterGrade
         
         super.init(firstName: firstName, lastName: lastName, age: age)
     }
@@ -102,25 +100,9 @@ class Student : Person {
         assignmentGrades.append(newGrade)
     }
     
-    func getLetterGrade() {
-        switch calcGradePercent() {
-        case 90.0...100.0:
-            letterGrade = "A"
-        case 80.0...89.0:
-            letterGrade = "B"
-        case 70.0...79.0:
-            letterGrade = "C"
-        case 60.0...69.0:
-            letterGrade = "D"
-        default:
-            letterGrade = "F"
-        }
-    }
-    
     func updateClassGrades() {
         if !assignmentGrades.isEmpty {
             calcGradePercent()
-            getLetterGrade()
         } else {
             print("No grades have been recorded.")
         }
@@ -129,19 +111,11 @@ class Student : Person {
 }
 
 
-var alsoMe = Student(currentClass: "iOS 401", assignmentGrades: [90.0, 89.0, 50.0], letterGrade: "B", firstName: "Erica", lastName: "Winberry", age: 40)
-
-alsoMe.currentGradePercent
-alsoMe.updateClassGrades()
-alsoMe.currentGradePercent
-
-alsoMe.letterGrade
+var alsoMe = Student(currentClass: "iOS 401", assignmentGrades: [90.0, 89.0, 50.0], firstName: "Erica", lastName: "Winberry", age: 40)
 
 alsoMe.addAssignmentGrade(newGrade: 89.0)
 alsoMe.updateClassGrades()
 alsoMe.currentGradePercent
-
-alsoMe.letterGrade
 
 
 
@@ -149,4 +123,16 @@ alsoMe.letterGrade
 // Create a Classroom class that is a true singleton and has an array of Students.
 // Add accessor methods to Classroom to add and remove from the array.
 
-class Classroom
+class Classroom {
+    
+    var studentList = [Student]()
+    
+    static let shared = Classroom()
+    
+    private init() {}
+    
+    
+}
+
+
+
