@@ -87,3 +87,20 @@ func countWords(arrayOfWords: [String]) {
 }
 
 countWords(arrayOfWords: arrayOfStrings)
+
+func countWordsTwo(_ arrayOfWords: [String]) {
+    var comparedWords: [String: Int] = [:]
+    
+    for word in arrayOfWords {
+        if (comparedWords[word] != nil) {
+            comparedWords[word]! += 1
+        }
+        else {
+            comparedWords[word] = 1
+        }
+    }
+    
+    print(comparedWords)
+}
+
+countWordsTwo(arrayOfStrings)
